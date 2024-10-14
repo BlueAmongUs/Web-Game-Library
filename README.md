@@ -39,7 +39,7 @@ Adding **multiplayer** support
 
 # Tests
 
-- COMING SOON
+- /test
 
 # Contribution
 

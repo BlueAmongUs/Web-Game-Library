@@ -1,0 +1,21 @@
+{
+  "name": "web-game-library",
+  "version": "1.0.0",
+  "description": "A custom web game library",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "keywords": [
+    "game",
+    "web",
+    "library",
+    "engine"
+  ],
+  "author": "BlueAmongUs",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@webgpu/types": "^0.1.48"
+  }
+}

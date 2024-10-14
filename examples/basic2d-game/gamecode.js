@@ -10,7 +10,7 @@ const { Renderer } = graphics;
 
 /**@type {HTMLCanvasElement} */
 const canvas = document.getElementById("canvas")
-const ctx = canvas.getContext("2d")
+const ctx = canvas.getContext("2d");
 const renderer = new Renderer(ctx);
 const animator = new Animator(renderer, onAnimate);
 
@@ -81,7 +81,7 @@ const inputkey = new InputKey({
     w() { direction.y = 0 },
     a() { direction.x = 0 },
     s() { this.w() },
-    d() { this.a() }
+    d() { this.a() },
 }, {
     w() {
         direction.y = -1

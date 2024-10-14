@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Reader</title>
+</head>
+<body>
+    <button id="copy" type="button">Copy</button>
+    <br>
+    <p id="keys"></p>
+    <script type="text/javascript">
+        const keys = document.getElementById("keys");
+        const copy_btn = document.getElementById("copy");
+        const saveds = [];
+        let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~ ]/;
+
+        document.addEventListener("keypress", ({key}) => {
+            let save = key.toLowerCase();
+            if (specialChars.test(save)) {
+                save = '\\' + save;
+            }
+            if (saveds.includes(save)) return;
+            if (saveds[0] === undefined) {
+                keys.textContent += "'" + save + "' ";
+            } else {
+                keys.textContent += "| '" + save + "' ";
+            }
+            saveds.push(save);
+        });
+
+        copy_btn.onclick = async () => {
+            if (keys.textContent.length < 1) return;
+            navigator.clipboard.writeText(keys.textContent)
+        }
+    </script>
+</body>
+</html>

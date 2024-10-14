@@ -1,5 +1,6 @@
 export class InputKey {
     /**
+     * ! MUST BE IN LOWERCASE
      * 
      * @param {import("./types/input-key.js").InputKeyMap} keyupmap 
      * @param {import("./types/input-key.js").InputKeyMap} keydownmap 
