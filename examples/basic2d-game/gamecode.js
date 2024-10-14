@@ -2,6 +2,8 @@ import { InputKey } from "../../src/controls/input-key.js";
 import { Instance } from "../../src/core/instance.js";
 import { Vector2 } from "../../src/geometry/vector2.js";
 import { Animator } from "../../src/graphics/animator.js";
+import { Boundary } from "../../src/physics/boundary.js";
+import { Collisions } from "../../src/physics/collisions.js";
 import { graphics, physics } from "../../src/webgamelib.js";
 
 const { Renderer } = graphics;
@@ -38,13 +40,21 @@ const instance3 = new Instance(
     renderer,
     Vector2.new(25, 25), Vector2.new(12.5, 12.5),
     drawrect
+);
+
+const dangerous_object = new Instance(
+    renderer,
+    Vector2.new(25, 25), Vector2.new(50, 50),
+    drawrect
 )
 
 function draw() {
     ctx.fillStyle = "#555555"
     instance1.draw();
     ctx.fillStyle = "#000000"
-    instance2.draw();    
+    instance2.draw();
+    ctx.fillStyle = "#FF0000";
+    dangerous_object.draw();
 }
 
 
@@ -54,10 +64,14 @@ instance3.draw();
 
 let direction = new Vector2();
 function onAnimate(_, delta_time) {
-    let collided = physics.Collisions.checkSingleCollision(instance1, instance3);
+    Boundary.checkAndAdjustOne(instance3, instance1, direction);
     draw();
-    ctx.fillStyle = collided === true ? "#FF0000" : "#00FF00";
     instance3.position = instance3.position.add(direction.multiply(delta_time / 10));
+    if (Collisions.checkSingleCollision(instance3, dangerous_object)) {
+        ctx.fillStyle = "#00FF00"
+    } else {
+        ctx.fillStyle = "#000000"
+    }
     instance3.draw();
 }
 

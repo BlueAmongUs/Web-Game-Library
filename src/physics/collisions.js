@@ -25,15 +25,15 @@ export class Collisions {
         const {position: p1, size: s1} = instance
         const {position: p2, size: s2} = instance2;
 
-        const a = p1.x <= p2.x + s1.x;
+        const a = p1.x < p2.x + s1.x;
 
-        // const b = p1.x + s1.x >= p2.x;
-        const b = p2.x <= p1.x + s1.x;
+        const b = p1.x + s1.x > p2.x;
+        // const b = p2.x < p1.x + s1.x;
         
-        const c = p1.y <= p2.y + s2.y
+        const c = p1.y < p2.y + s2.y
         
-        // const d = p1.y + s1.y >= p2.y
-        const d = p2.y <= p1.y + s1.y;
+        const d = p1.y + s1.y > p2.y
+        // const d = p2.y < p1.y + s1.y;
 
         return a && b && c && d;
     }
@@ -115,13 +115,13 @@ export function checkOneCollisionAlpha(instance, instance2) {
         // Top
         const t1 = p1.y + s1.y;
         const b2 = p2.y - s2.y;
-        const top = t1 <= b2; // t1 >= b2(in default way)
+        const top = t1 < b2; // t1 >= b2(in default way)
         // ! (0,0) begins in Top Left corner
         
         // Bottom
         const b1 = p1.y - s1.y;
         const t2 = p2.y + s2.y;
-        const bottom = b1 >= t2 // b1 <= t2(in default way)
+        const bottom = b1 > t2 // b1 <= t2(in default way)
         // ! (0,0) begins in Top Left corner
 
         const vertical_collided = top && bottom
@@ -132,13 +132,13 @@ export function checkOneCollisionAlpha(instance, instance2) {
         // Left
         const l1 = p1.x - s1.x;
         const r2 = p2.x + s2.y;
-        const left = l1 >= r2;
+        const left = l1 > r2;
         
         // Right
         
         const r1 = p1.x + s1.x;
         const l2 = p2.x - s2.y;
-        const right = r1 >= l2
+        const right = r1 > l2
 
         const horizontal_collided = left && right
 
