@@ -7,9 +7,9 @@ const canvas_format = navigator.gpu.getPreferredCanvasFormat()
 
 async function triangle() {
     const triangle_vertices = new Float32Array([
-        -0.5, -0.5, 0, 1,
-        0, 0.5, 0, 1,
-        0.5, -0.5, 0, 1
+        -0.5, -0.5, 0, 1,   0, 0, 0, 1,
+        0, 0.5, 0, 1,   0, 1, 0, 1,
+        0.5, -0.5, 0, 1,    0, 0, 0, 1
     ]);
     
     const adapter = await navigator.gpu.requestAdapter();
@@ -85,7 +85,7 @@ async function triangle() {
     const pass = encoder.beginRenderPass({
         colorAttachments: [
             {
-                clearValue: { r: 0.0, g: 0.5, b: 1.0, a: 1.0 },
+                clearValue: { r: 1, g: 1, b: 1.0, a: 1.0 },
                 loadOp: "clear",
                 storeOp: "store",
                 view: ctx.getCurrentTexture().createView(),
@@ -96,6 +96,7 @@ async function triangle() {
     pass.setPipeline(pipeline);
     pass.setVertexBuffer(0, triangle_buffer);
     pass.draw(3);
+    pass.end();
 
     device.queue.submit([encoder.finish()]);
 }
