@@ -6,6 +6,8 @@ const ctx = canvas.getContext("webgpu");
 const canvas_format = navigator.gpu.getPreferredCanvasFormat()
 
 async function triangle() {
+    console.time("gpu");
+    // Position, Colour
     const triangle_vertices = new Float32Array([
         -0.5, -0.5, 0, 1,   0, 0, 0, 1,
         0, 0.5, 0, 1,   0, 1, 0, 1,
@@ -47,7 +49,7 @@ async function triangle() {
                     format: "float32x4",
                 },
                 {
-                    shaderLocation: 1, // color
+                    shaderLocation: 1, // colour
                     offset: 16,
                     format: "float32x4",
                 },
@@ -99,6 +101,7 @@ async function triangle() {
     pass.end();
 
     device.queue.submit([encoder.finish()]);
+    console.timeEnd("gpu")
 }
 
 triangle();
