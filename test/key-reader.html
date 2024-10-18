@@ -13,8 +13,8 @@
         const keys = document.getElementById("keys");
         const copy_btn = document.getElementById("copy");
         const saveds = [];
-        let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~ ]/;
-
+        let specialChars = /[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~ ]/;
+        
         document.addEventListener("keypress", ({key}) => {
             let save = key.toLowerCase();
             if (specialChars.test(save)) {

@@ -1,7 +1,7 @@
 // Define global buffer size
 const BUFFER_SIZE = 1000;
 
-const div = document.querySelector("#div")
+const div = document.querySelector("#div");
 
 async function main() {
     console.time("t");

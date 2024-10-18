@@ -77,6 +77,7 @@ function onAnimate(_, delta_time) {
 
 animator.activate()
 
+
 const inputkey = new InputKey({
     w() { direction.y = 0 },
     a() { direction.x = 0 },
