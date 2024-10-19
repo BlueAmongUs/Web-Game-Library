@@ -58,6 +58,7 @@ async function main() {
         compute: {
             module: shader,
             entryPoint: "main",
+            constants: { BUFFER_SIZE }
         },
     });
 
@@ -93,12 +94,13 @@ async function main() {
     const data = copyArrayBuffer.slice();
     stagingBuffer.unmap();
     const result = new Float32Array(data)
+
     for (let i = 0; i < result.length; i++) {
-        const value = result[i];
-        const el = document.createElement("p");
-        el.textContent = i + " : " + value
-        div.appendChild(el);
+        const result_el = document.createElement("p");
+        result_el.textContent = i + " : " + result[i];
+        div.appendChild(result_el);
     }
+    
     console.timeEnd("t");
 }
 
